@@ -41,6 +41,8 @@ pub enum AmmError {
     InsufficientBalance,
     #[msg("Zero balance.")]
     ZeroBalance,
+    #[msg("Pool is Empty")]
+    EmptyPool
 }
 
 impl From<CurveError> for AmmError {
