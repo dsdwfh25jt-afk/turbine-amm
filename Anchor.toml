@@ -7,7 +7,7 @@ resolution = true
 skip-lint = false
 
 [programs.localnet]
-ammq32026 = "7eTS3j8P9UKxPnXYaP377UvoQvaiUfpQkqF4dcuvwfUx"
+ammq32026 = "8BPAo6Z8BgMQ4Dr3vErasi8DgUgJB4wuXFzvS2M1rs5z"
 
 [provider]
 cluster = "localnet"

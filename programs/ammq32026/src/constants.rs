@@ -1,7 +1,7 @@
 use anchor_lang::prelude::*;
 
 #[constant]
-pub const COUNTER_SEED: &[u8] = b"counter";
+pub const CONFIG_SEEDS: &[u8] = b"Configuration_account_SEED";
 
 #[constant]
 pub const HELLO_WORLD_LAMPORTS: u64 = 1;

@@ -8,7 +8,7 @@ use constant_product_curve::ConstantProduct;
 use crate::{error::AmmError, state::Config};
 
 #[derive(Accounts)]
-pub struct Deposit<'info> {
+pub struct Deposite<'info> {
     #[account(mut)]
     pub user: Signer<'info>,
     pub mint_x: Account<'info, Mint>,
@@ -63,8 +63,8 @@ pub struct Deposit<'info> {
     pub associated_token_program: Program<'info, AssociatedToken>,
 }
 
-impl<'info> Deposit<'info> {
-    pub fn deposit(
+impl<'info> Deposite<'info> {
+    pub fn deposite(
         &mut self,
         amount: u64, // Amount of LP tokens that the user wants to "claim"
         max_x: u64,  // Maximum amount of token X that the user is willing to deposit

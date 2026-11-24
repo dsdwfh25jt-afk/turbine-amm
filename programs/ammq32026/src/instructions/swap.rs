@@ -5,7 +5,7 @@ use anchor_spl::{
 };
 use constant_product_curve::ConstantProduct;
 
-use crate::{error::AmmError, state::Config};
+use crate::{error::AmmError, state::Config, constants::*};
 
 #[derive(Accounts)]
 
@@ -17,7 +17,7 @@ pub struct Swap <'info> {
      #[account(
         has_one = mint_x,
         has_one = mint_y,
-        seeds = [b"config", config.seed.to_le_bytes().as_ref()],
+        seeds = [CONFIG_SEEDS, config.seed.to_le_bytes().as_ref()],
         bump = config.config_bump,
     )]
     pub config : Account<'info, Config>,
@@ -65,9 +65,7 @@ impl<'info> Swap<'info> {
         };
 
         require!(reserve_in > 0 && reserve_out > 0, AmmError::EmptyPool);
-
-        // 2. Calculate fee and output amount using u128 to avoid overflow
-        // Assuming `config.fee` is in basis points (e.g., 30 = 0.30% out of 10_000)
+        
         let fee_bps = self.config.fee as u128;
         let amount_in_u128 = amount_in as u128;
         let reserve_in_u128 = reserve_in as u128;
@@ -153,7 +151,7 @@ impl<'info> Swap<'info> {
         let seed_bytes = self.config.seed.to_le_bytes();
         let signer_seeds: &[&[&[u8]]] = &[&[
             b"config",
-            seed_bytes.to_le_bytes().as_ref(),
+            seed_bytes.as_ref(),
             &[self.config.config_bump],
         ]];
 
