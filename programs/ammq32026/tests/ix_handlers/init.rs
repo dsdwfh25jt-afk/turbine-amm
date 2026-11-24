@@ -24,14 +24,14 @@ pub fn create_initialise_ix(
     let maker = payer.pubkey();
 
     Instruction::new_with_bytes(
-        ammq32026::id(),
-        &ammq32026::instruction::Initialize {
+        amm::id(),
+        &amm::instruction::Initialize {
             seed: 123,
-            fee: 30,
+            fees: 30,
             authority: Some(maker),
         }
         .data(),
-        ammq32026::accounts::Initialize {
+        amm::accounts::Initialize {
             initializer: maker,
             mint_x,
             mint_y,

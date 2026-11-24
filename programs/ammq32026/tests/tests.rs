@@ -36,12 +36,12 @@ fn setup() -> (
     Pubkey,
     Pubkey,
 ) {
-    let program_id = ammq32026::id();
+    let program_id = amm::id();
     let payer = Keypair::new();
     let mut svm = LiteSVM::new();
     let bytes = include_bytes!(concat!(
         env!("CARGO_TARGET_TMPDIR"),
-        "/../deploy/ammq32026.so"
+        "/../deploy/amm.so"
     ));
 
     svm.add_program(program_id, bytes).unwrap();
@@ -62,8 +62,8 @@ fn setup() -> (
         .unwrap();
 
     let config =
-        Pubkey::find_program_address(&[b"config", &123u64.to_le_bytes()], &ammq32026::id()).0;
-    let mint_lp = Pubkey::find_program_address(&[b"lp", config.as_ref()], &ammq32026::id()).0;
+        Pubkey::find_program_address(&[b"config", &123u64.to_le_bytes()], &amm::id()).0;
+    let mint_lp = Pubkey::find_program_address(&[b"lp", config.as_ref()], &amm::id()).0;
 
     // Derive the PDA for the vault associated token account using the config PDA and Mint A
     let vault_x = associated_token::get_associated_token_address(&config, &mint_x);
